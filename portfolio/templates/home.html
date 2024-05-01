@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - My Portfolio</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#skill">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="{% url 'admin:index' %}">Admin</a></li> 
+            <li style="float:right"><a href="#contact">Contact</a></li>
+            {% if user.is_authenticated %}
+    <li style="float:right">
+        <a href="#">{{ user.username }}</a>
+        <a href="{% url 'logout' %}">Logout</a>
+    </li>
+{% else %}
+    <li style="float:right">
+        <a href="{% url 'login' %}">Login</a>
+    </li>
+{% endif %}
+
+
+           
+        </ul>
+    </nav>
+    <section class="about-us" id="about">
+        <div class="about">
+          <!--<img src="girl.png" class="pic">-->
+          <img src="{% static 'images/Harsh.jpeg' %}"class="pic" >
+          <div class="text">
+            <h2>About Me</h2>
+            <h5>Front-end Developer & <span>Designer</span></h5>
+              <p>I'm an engineering student at Lovely Professional University, constantly pushing the boundaries of what I can create.I'm always seeking out opportunities to grow and learn.</p>
+            <div class="data">
+            <a href="{% static 'resumee.pdf' %}" class="hire">Resume</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="skill"id="skill">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<div class="skills">
+ 
+  <div class="each html">
+    <div class="box">
+      <div class="content">
+        <h2>HTML</h2>
+        <p>Lorem, ipsum dolor elit. Sapiente, nemo.</p>
+        <i class="fa-brands fa-html5"></i>
+      </div>
+    </div>
+  </div>
+  <div class="each css">
+    <div class="box">
+      <div class="content">
+        <h2>CSS</h2>
+        <p>Lorem, ipsum dolor elit. Sapiente, nemo.</p>
+        <i class="fa-brands fa-css3"></i>
+      </div>
+    </div>
+  </div>
+  <div class="center">
+    <div class="box">
+      <h2>SKILLS</h2>
+    </div>
+  </div>
+  <div class="each js">
+    <div class="box">
+      <div class="content">
+        <i class="fa-brands fa-js"></i>
+        <h2>JAVASCRIPT</h2>
+        <p>Lorem, ipsum dolor elit. Sapiente, nemo.</p>
+      </div>
+    </div>
+  </div>
+  <div class="each ng">
+    <div class="box">
+      <div class="content">
+        <i class="fa-brands fa-angular"></i>
+        <h2>ANGULAR</h2>
+        <p>Lorem, ipsum dolor elit. Sapiente, nemo.</p>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<div id="pp">
+    <h2 class="text-center">Projects</h2>
+</div>
+{% comment %} <div id="projects" class="projects-section">
+    <div class="projects-container">
+        <div class="project">
+            <div class="project-info">
+                <h3>Project 1: Personal Portfolio</h3>
+                <div class="project-details">
+                    <img class="thumbnail" src="{% static 'images/p1.png' %}" alt="Project 1 Thumbnail">
+                    <p>A website showcasing my skills, projects, and experiences.</p>
+                    <a href="{% url 'project_details' %}">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="project">
+            <div class="project-info">
+                <h3>Project 2: Chat Application</h3>
+                <div class="project-details">
+                    <img class="thumbnail" src="{% static 'images/p2.jpg' %}" alt="Project 2 Thumbnail">
+                    <p>A real-time messaging application built using various technologies.</p>
+                    <a href="{% url 'project_details' %}">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="project">
+            <div class="project-info">
+                <h3>Project 3: Job Seeking Website</h3>
+                <div class="project-details">
+                    <img class="thumbnail" src="{% static 'images/p3.jpg' %}" alt="Project 3 Thumbnail">
+                    <p>A platform connecting job seekers with potential employers.</p>
+                    <a href="{% url 'project_details' %}">Read More</a>
+                </div>
+            </div>
+        </div>
+        <div class="project">
+            <div class="project-info">
+                <h3>Project 4: E-commerce Platform</h3>
+                <div class="project-details">
+                    <img class="thumbnail" src="{% static 'images/p4.jpg' %}" alt="Project 4 Thumbnail">
+                    <p>An online marketplace for buying and selling products.</p>
+                    <a href="{% url 'project_details' %}">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+     {% endcomment %}
+
+     <div id="projects" class="projects-section">
+      <div class="projects-container">
+          {% for project in projects %}
+          <div class="project">
+              <div class="project-info">
+                  <h3>{{ project.title }}</h3>
+                  <div class="project-details">
+                      <img class="thumbnail" src="{{ project.image.url }}" alt="{{ project.title }} Thumbnail">
+                      <p>{{ project.description }}</p>
+                      <a href="{% url 'project_details' project.id %}">Read More</a>
+                  </div>
+              </div>
+          </div>
+          {% endfor %}
+      </div>
+  </div>
+  
+    
+    
+    
+
+    
+    
+
+    <div id="contact">
+        <h2>Contact</h2>
+        <form id="contact-form" method="POST" action="{% url 'contact_submit' %}">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" cols="50" required></textarea><br><br>
+            <input type="submit" value="Submit">
+        </form>
+    </div>
+    <div style="background-color: black; padding: 20px; text-align: center;">
+      <div style="display: inline-block;">
+          <ul style="list-style-type: none; padding: 0;">
+              <li style="display: inline-block; margin-right: 10px;">
+                  <a href="https://twitter.com/HarshRa42128181" style="text-decoration: none; color: #333; font-weight: bold;">Twitter</a>
+              </li>
+              <li style="display: inline-block; margin-right: 10px;">
+                  <a href="https://www.linkedin.com/in/harsh-raj-990a6a1aa/" style="text-decoration: none; color: #333; font-weight: bold;">LinkedIn</a>
+              </li>
+              <!-- Add other social media links as needed -->
+          </ul>
+      </div>
+      <div style="margin-top: 20px; color: #666; font-size: 14px;">
+          <p>&copy; 2024 My Portfolio. All rights reserved.</p>
+      </div>
+  </div>
+  
+  
+
+    <script>
+        // JavaScript for smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
